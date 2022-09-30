@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import "./App.css";
+import SearchInput from "./components/SearchInput";
+import Middle from "./components/Middle";
+import img from "./assets/19cover.jpg.crdownload";
+import theme from "./assets/theme/theme";
+import Footer from "./components/Footer";
+import { useState } from "react";
+import DataContext from "./context/dataContext";
 
 function App() {
+  const [weather, setWeather] = useState({});
+  const [loading, setLoading] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <DataContext.Provider value={{setWeather , weather , loading , setLoading }}>
+        <Box
+          sx={{
+            overflow: "hidden",
+            height: "100vh",
+            background: `url(${img}) no-repeat center/cover`,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <CssBaseline />
+          <SearchInput />
+          <Middle />
+          <Footer />
+        </Box>
+      </DataContext.Provider>
+    </ThemeProvider>
   );
 }
 
